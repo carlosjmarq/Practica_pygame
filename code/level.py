@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from player import Player
 from tile import Tile
+from debug import debug
 
 class Level:
 	def __init__(self):
@@ -14,7 +15,9 @@ class Level:
 	def run(self):
 		#drawing and updating the game
 		self.visible_sprites.draw(self.display_surface)
-		pass
+		self.visible_sprites.update()
+		debug(self.player.direction)
+		
 
 	def create_map(self):
 		for i,row in enumerate(WORLD_MAP):
@@ -24,4 +27,4 @@ class Level:
 				if cell == 'x':
 					Tile((x,y),[self.visible_sprites,self.obstacle_sprites])
 				if cell == 'p':
-					Player((x,y),[self.visible_sprites])
+					self.player = Player((x,y),[self.visible_sprites])
